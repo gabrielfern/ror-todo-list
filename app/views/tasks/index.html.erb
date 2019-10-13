@@ -1,0 +1,16 @@
+<div class='container'>
+    <%= form_with scope: :task, url: tasks_path do |form| %>
+        <p>
+            <%= form.label :description %>
+        <br>
+            <%= form.text_field :description, :class => 'form-control' %>
+        </p>
+
+        <p>
+            <%= form.submit 'Create', :class => 'btn btn-outline-primary float-right' %>
+        </p>
+    <% end %>
+    <p>
+        Number of created tasks: <%= @tasks.length %>
+    </p>
+</div>
