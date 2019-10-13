@@ -13,4 +13,23 @@
     <p>
         Number of created tasks: <%= @tasks.length %>
     </p>
+
+    <div class="container">
+        <div class="row">
+            #
+            <div class="col-sm">
+                Task Description
+            </div>
+        </div>
+    </div>
+    <% @tasks.each_with_index do |task, index| %>
+        <div class="container">
+            <div class="row">
+                <%= index + 1 %>
+                <div class="col-sm">
+                    <%= task.description %>
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>
