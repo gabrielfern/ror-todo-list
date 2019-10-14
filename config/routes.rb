@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post '/tasks', to: 'tasks#create'
   put '/tasks/:id', to: 'tasks#update'
   delete '/tasks/:id', to: 'tasks#destroy'
+  delete '/tasks', to: 'tasks#reset'
 end

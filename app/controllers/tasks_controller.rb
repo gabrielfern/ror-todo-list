@@ -26,4 +26,8 @@ class TasksController < ApplicationController
         @task.destroy
         redirect_to root_path
     end
+    def reset
+        ActiveRecord::Base.connection.execute("TRUNCATE TABLE tasks RESTART IDENTITY;")
+        redirect_to root_path
+    end
 end

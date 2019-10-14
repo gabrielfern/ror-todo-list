@@ -20,10 +20,18 @@
     <p class="text-muted">
         Number of tasks: <%= @open_tasks.length + @finished_tasks.length %>
     </p>
+    <input type="button" class="btn btn-danger" value="Reset tasks" onclick="resetTasks()">
+    <br>
 
     <br>
 
     <h3>Open Tasks</h3>
+    <div class="progress" style="height: 10px;">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+            style="width: <%= @open_tasks.length + @finished_tasks.length > 0 ?
+                (@open_tasks.length.to_f / (@open_tasks.length + @finished_tasks.length) * 100).floor : 0 %>%;">
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -51,6 +59,12 @@
     <br>
 
     <h3>Finished Tasks</h3>
+    <div class="progress" style="height: 10px;">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            style="width: <%= @open_tasks.length + @finished_tasks.length > 0 ?
+                (@finished_tasks.length.to_f / (@open_tasks.length + @finished_tasks.length) * 100).floor : 0 %>%;">
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -98,11 +112,36 @@
   </div>
 </div>
 
+<div class="modal fade" id="resetTasksModal" tabindex="-1" role="dialog" aria-labelledby="resetTasksModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h5>Are you sure you want to delete all tasks?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <%= button_to 'Reset tasks',
+            "/tasks",
+            method: :delete,
+            remote: true,
+            id: 'resetTasksButton',
+            class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
     $('#deleteTaskModal').on('shown.bs.modal', () => $('#deleteTaskButton').focus())
+    $('#resetTasksModal').on('shown.bs.modal', () => $('#resetTasksButton').focus())
+
     function deleteTask(task) {
         $('#deleteTaskModal').modal()
         $('#deleteTaskId').text(task)
         $('#deleteTaskLink').prop('action', `/tasks/${task}`)
+    }
+
+    function resetTasks() {
+        $('#resetTasksModal').modal()
     }
 </script>
