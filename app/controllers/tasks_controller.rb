@@ -6,9 +6,12 @@ class TasksController < ApplicationController
 
     def create
         @task = Task.new(params.require(:task).permit(:description))
-        @task[:finished] = false
-        @task.save
-        redirect_to root_path
+        @task.finished = false
+        if @task.save
+            redirect_to root_path
+        else
+            render js: "$('#alertCreateError').removeClass('d-none')"
+        end
     end
 
     def update
