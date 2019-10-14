@@ -46,11 +46,15 @@
                     <th scope="row"><%= task.id %></th>
                     <td><%= task.description %></td>
                     <td>
-                        <%= link_to 'Finish', "/tasks/#{task.id}",
+                        <%= link_to "/tasks/#{task.id}",
                             method: :put,
                             remote: true,
-                            :class => 'btn btn-outline-primary' %>
-                        <input type="button" class="btn btn-outline-danger" value="Delete" onclick="deleteTask(<%= task.id %>)">
+                            style: "padding: 15px; display: inline-block;" do %>
+                            <%= octicon "checklist" %>
+                        <% end %>
+                        <a href="javascript:" style="padding: 15px; display: inline-block;" onclick="deleteTask(<%= task.id %>)">
+                            <%= octicon "trashcan" %>
+                        </a>
                     </td>
                 </tr>
             <% end %>
@@ -79,11 +83,15 @@
                     <th scope="row"><%= task.id %></th>
                     <td><%= task.description %></td>
                     <td>
-                        <%= link_to 'Reopen', "/tasks/#{task.id}",
+                        <%= link_to "/tasks/#{task.id}",
                             method: :put,
                             remote: true,
-                            :class => 'btn btn-outline-primary' %>
-                        <input type="button" class="btn btn-outline-danger" value="Delete" onclick="deleteTask(<%= task.id %>)">
+                            style: "padding: 15px; display: inline-block;" do %>
+                            <%= octicon "checklist" %>
+                        <% end %>
+                        <a href="javascript:" style="padding: 15px; display: inline-block;" onclick="deleteTask(<%= task.id %>)">
+                            <%= octicon "trashcan" %>
+                        </a>
                     </td>
                 </tr>
             <% end %>

@@ -98,6 +98,11 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
+    octicons (9.1.1)
+      nokogiri (>= 1.6.3.1)
+    octicons_helper (9.1.1)
+      octicons (= 9.1.1)
+      rails
     pg (1.1.4)
     popper_js (1.14.5)
     puma (3.12.1)
@@ -198,6 +203,7 @@ DEPENDENCIES
   byebug
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
+  octicons_helper
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 6.0.0)
