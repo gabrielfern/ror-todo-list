@@ -17,60 +17,66 @@
     </p>
 
     <br>
-    <hr>
-    <div class="container font-weight-bold">
-        <h3>Open Tasks</h3>
-        <div class="row">
-                #
-            <div class="col">
-                Task Description
-            </div>
-            <div class="col">
-                Finished
-            </div>
-        </div>
-    </div>
-    <% @open_tasks.each do |task| %>
-        <div class="container">
-            <div class="row">
-                <%= task.id %>
-                <div class="col">
-                    <%= task.description %>
-                </div>
-                <div class="col">
-                    <input type="checkbox" data-remote="true" <%= 'checked' if task.finished %>
-                        data-url="/tasks/<%= task.id %>" data-params="finished=<%= !task.finished %>" data-method="put">
-                </div>
-            </div>
-        </div>
-    <% end %>
+
+    <h3>Open Tasks</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @open_tasks.each do |task| %>
+                <tr>
+                    <th scope="row"><%= task.id %></th>
+                    <td><%= task.description %></td>
+                    <td>
+                        <%= link_to 'Finish', "/tasks/#{task.id}",
+                            method: :put,
+                            remote: true,
+                            :class => '' %>
+                        <%= link_to 'Delete', "/tasks/#{task.id}",
+                            method: :delete,
+                            remote: true,
+                            data: {confirm: 'Are you sure you want to delete this task?'},
+                            :class => 'text-danger' %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
     <br>
-    <hr>
-    <div class="container font-weight-bold">
-        <h3>Finished Tasks</h3>
-        <div class="row">
-                #
-            <div class="col">
-                Task Description
-            </div>
-            <div class="col">
-                Finished
-            </div>
-        </div>
-    </div>
-    <% @finished_tasks.each do |task| %>
-        <div class="container">
-            <div class="row">
-                <%= task.id %>
-                <div class="col">
-                    <%= task.description %>
-                </div>
-                <div class="col">
-                    <input type="checkbox" data-remote="true" <%= 'checked' if task.finished %>
-                        data-url="/tasks/<%= task.id %>" data-params="finished=<%= !task.finished %>" data-method="put">
-                </div>
-            </div>
-        </div>
-    <% end %>
+
+    <h3>Finished Tasks</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @finished_tasks.each do |task| %>
+                <tr>
+                    <th scope="row"><%= task.id %></th>
+                    <td><%= task.description %></td>
+                    <td>
+                        <%= link_to 'Reopen', "/tasks/#{task.id}",
+                            method: :put,
+                            remote: true,
+                            :class => '' %>
+                        <%= link_to 'Delete', "/tasks/#{task.id}",
+                            method: :delete,
+                            remote: true,
+                            data: {confirm: 'Are you sure you want to delete this task?'},
+                            :class => 'text-danger' %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
     <br>
 </div>
