@@ -1,7 +1,9 @@
 <div class='container'>
+    <br>
+    <h3>Create Task</h3>
     <%= form_with scope: :task, url: tasks_path do |form| %>
         <p>
-            <%= form.label :description %>
+            <%= form.label :description, class: "font-weight-bold" %>
         <br>
             <%= form.text_field :description, :class => 'form-control' %>
         </p>
@@ -10,26 +12,65 @@
             <%= form.submit 'Create', :class => 'btn btn-outline-primary float-right' %>
         </p>
     <% end %>
-    <p>
-        Number of created tasks: <%= @tasks.length %>
+    <p class="text-muted">
+        Number of tasks: <%= @open_tasks.length + @finished_tasks.length %>
     </p>
 
-    <div class="container">
+    <br>
+    <hr>
+    <div class="container font-weight-bold">
+        <h3>Open Tasks</h3>
         <div class="row">
-            #
-            <div class="col-sm">
+                #
+            <div class="col">
                 Task Description
+            </div>
+            <div class="col">
+                Finished
             </div>
         </div>
     </div>
-    <% @tasks.each_with_index do |task, index| %>
+    <% @open_tasks.each do |task| %>
         <div class="container">
             <div class="row">
-                <%= index + 1 %>
-                <div class="col-sm">
+                <%= task.id %>
+                <div class="col">
                     <%= task.description %>
+                </div>
+                <div class="col">
+                    <input type="checkbox" data-remote="true" <%= 'checked' if task.finished %>
+                        data-url="/tasks/<%= task.id %>" data-params="finished=<%= !task.finished %>" data-method="put">
                 </div>
             </div>
         </div>
     <% end %>
+    <br>
+    <hr>
+    <div class="container font-weight-bold">
+        <h3>Finished Tasks</h3>
+        <div class="row">
+                #
+            <div class="col">
+                Task Description
+            </div>
+            <div class="col">
+                Finished
+            </div>
+        </div>
+    </div>
+    <% @finished_tasks.each do |task| %>
+        <div class="container">
+            <div class="row">
+                <%= task.id %>
+                <div class="col">
+                    <%= task.description %>
+                </div>
+                <div class="col">
+                    <input type="checkbox" data-remote="true" <%= 'checked' if task.finished %>
+                        data-url="/tasks/<%= task.id %>" data-params="finished=<%= !task.finished %>" data-method="put">
+                </div>
+            </div>
+        </div>
+    <% end %>
+    <br>
 </div>
