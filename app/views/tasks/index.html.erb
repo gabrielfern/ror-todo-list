@@ -3,9 +3,9 @@
     <h3>Create Task</h3>
     <%= form_with scope: :task, url: tasks_path do |form| %>
         <p>
-            <%= form.label :description, class: "font-weight-bold" %>
+            <%= form.label :description, class: 'font-weight-bold' %>
         <br>
-            <%= form.text_field :description, class: 'form-control' %>
+            <%= form.text_area :description, class: 'form-control' %>
         </p>
         <div id="alertCreateError" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
             Task description must be at least 3 characters long
@@ -42,16 +42,20 @@
         </thead>
         <tbody>
             <% @open_tasks.each do |task| %>
+                <%= render partial: "edit", locals: {task: task} %>
                 <tr>
                     <th scope="row"><%= task.id %></th>
-                    <td><%= task.description %></td>
+                    <td style="white-space: pre-wrap"><%= task.description %></td>
                     <td>
-                        <%= link_to "/tasks/#{task.id}",
+                        <%= link_to "/tasks/#{task.id}/switch",
                             method: :put,
                             remote: true,
                             style: "padding: 15px; display: inline-block;" do %>
                             <%= octicon "checklist" %>
                         <% end %>
+                        <a href="javascript:" style="padding: 15px; display: inline-block;" onclick="editModal<%= task.id %>()">
+                            <%= octicon "pencil" %>
+                        </a>
                         <a href="javascript:" style="padding: 15px; display: inline-block;" onclick="deleteTask(<%= task.id %>)">
                             <%= octicon "trashcan" %>
                         </a>
@@ -79,16 +83,20 @@
         </thead>
         <tbody>
             <% @finished_tasks.each do |task| %>
+                <%= render partial: "edit", locals: {task: task} %>
                 <tr>
                     <th scope="row"><%= task.id %></th>
-                    <td><%= task.description %></td>
+                    <td style="white-space: pre-wrap"><%= task.description %></td>
                     <td>
-                        <%= link_to "/tasks/#{task.id}",
+                        <%= link_to "/tasks/#{task.id}/switch",
                             method: :put,
                             remote: true,
                             style: "padding: 15px; display: inline-block;" do %>
                             <%= octicon "checklist" %>
                         <% end %>
+                        <a href="javascript:" style="padding: 15px; display: inline-block;" onclick="editModal<%= task.id %>()">
+                            <%= octicon "pencil" %>
+                        </a>
                         <a href="javascript:" style="padding: 15px; display: inline-block;" onclick="deleteTask(<%= task.id %>)">
                             <%= octicon "trashcan" %>
                         </a>

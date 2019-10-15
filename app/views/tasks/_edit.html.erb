@@ -1,0 +1,42 @@
+<div class="modal fade" id="editModal<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="editModal<%= task.id %>Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Task #<%= task.id %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= hidden_field_tag "description_hidden#{task.id}", task.description%>
+      <%= form_with model: task, url: "/tasks/#{task.id}", method: :put, id: "form#{task.id}" do |form| %>
+        <div class="modal-body">
+            <p>
+                <%= form.label :description, class: 'font-weight-bold' %>
+            <br>
+                <%= form.text_area :description, class: 'form-control', form: "form#{task.id}", id: "description#{task.id}" %>
+            </p>
+            <div class="custom-control custom-checkbox">
+                <%= form.check_box :finished, class: 'custom-control-input', id: "finished#{task.id}", form: "form#{task.id}" %>
+                <label class="custom-control-label" for="finished<%= task.id %>">Is task finished?</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <%= form.submit 'Update',
+                class: 'btn btn-primary', form: "form#{task.id}" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('#editModal<%= task.id %>').on('shown.bs.modal', () => $('#description<%= task.id %>').select())
+
+    function editModal<%= task.id %>() {
+        $('#editModal<%= task.id %>').modal()
+        let decodedText = $('#description_hidden<%= task.id %>').val()
+        $('#description<%= task.id %>').val(decodedText)
+        $('#finished<%= task.id %>').prop('checked', <%= task.finished %>)
+    }
+</script>

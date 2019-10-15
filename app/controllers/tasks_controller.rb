@@ -16,6 +16,12 @@ class TasksController < ApplicationController
 
     def update
         @task = Task.find(params[:id])
+        @task.update(params.require(:task).permit(:description, :finished))
+        redirect_to root_path
+    end
+
+    def switch
+        @task = Task.find(params[:id])
         @task.finished = !@task.finished
         @task.save
         redirect_to root_path
@@ -26,6 +32,7 @@ class TasksController < ApplicationController
         @task.destroy
         redirect_to root_path
     end
+
     def reset
         ActiveRecord::Base.connection.execute("TRUNCATE TABLE tasks RESTART IDENTITY;")
         redirect_to root_path
