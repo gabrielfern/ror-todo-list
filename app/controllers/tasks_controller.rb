@@ -2,6 +2,10 @@ class TasksController < ApplicationController
     def index
         @open_tasks = Task.where(finished: false).reorder('updated_at').reverse_order
         @finished_tasks = Task.where(finished: true).reorder('updated_at').reverse_order
+        @num_tasks = @open_tasks.length + @finished_tasks.length
+        @open_percentage = @num_tasks > 0 ? 
+            (@open_tasks.length.to_f / @num_tasks * 100).ceil : 0
+        @finished_percentage = @num_tasks > 0 ? 100 - @open_percentage : 0
     end
 
     def create

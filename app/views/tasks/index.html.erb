@@ -18,7 +18,7 @@
         </p>
     <% end %>
     <p class="text-muted">
-        Number of tasks: <%= @open_tasks.length + @finished_tasks.length %>
+        Number of tasks: <%= @num_tasks %>
     </p>
     <input type="button" class="btn btn-danger" value="Reset tasks" onclick="resetTasks()">
     <br>
@@ -26,10 +26,10 @@
     <br>
 
     <h3>Open Tasks</h3>
-    <div class="progress" style="height: 10px;">
+    <div class="progress" style="height: 15px;">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
-            style="width: <%= @open_tasks.length + @finished_tasks.length > 0 ?
-                (@open_tasks.length.to_f / (@open_tasks.length + @finished_tasks.length) * 100).floor : 0 %>%;">
+            style="width: <%= @open_percentage %>%;">
+                <%= @open_percentage %>%
         </div>
     </div>
     <table class="table table-striped">
@@ -67,10 +67,10 @@
     <br>
 
     <h3>Finished Tasks</h3>
-    <div class="progress" style="height: 10px;">
+    <div class="progress" style="height: 15px;">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-            style="width: <%= @open_tasks.length + @finished_tasks.length > 0 ?
-                (@finished_tasks.length.to_f / (@open_tasks.length + @finished_tasks.length) * 100).floor : 0 %>%;">
+            style="width: <%= @finished_percentage %>%;">
+                <%= @finished_percentage %>%
         </div>
     </div>
     <table class="table table-striped">
