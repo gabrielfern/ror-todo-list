@@ -58,6 +58,8 @@ development:
 test:
   <<: *default
   database: ror_todo_list_test
+  username: postgres
+  host: localhost
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,5 +83,5 @@ test:
 production:
   <<: *default
   database: ror_todo_list_production
-  username: ror_todo_list
-  password: <%= ENV['ROR_TODO_LIST_DATABASE_PASSWORD'] %>
+  username: postgres
+  host: localhost

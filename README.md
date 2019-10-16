@@ -1,24 +1,15 @@
-# README
+# To Do List
+Keep track of to-do tasks on an easy and beautiful web application built with Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Setup
+PostgreSQL needed, change config/database.yml if necessary
 
-Things you may want to cover:
+> bundle install --path vendor/bundle
 
-* Ruby version
+> yarn install
 
-* System dependencies
+> rails db:setup
 
-* Configuration
+# Run
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+> rails s
