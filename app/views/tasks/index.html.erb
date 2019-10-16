@@ -1,6 +1,11 @@
+<nav class="navbar navbar-light bg-secondary">
+<div class='container'>
+    <h3 class="text-center text-white"><img src="/favicon.ico">To Do List</h3>
+</div>
+</nav>
 <div class='container'>
     <br>
-    <h3>Create Task</h3>
+    <h4>Create Task</h4>
     <%= form_with scope: :task, url: tasks_path do |form| %>
         <p>
             <%= form.label :description, class: 'font-weight-bold' %>
@@ -25,7 +30,7 @@
 
     <br>
 
-    <h3>Open Tasks</h3>
+    <h4>Open Tasks</h4>
     <div class="progress" style="height: 15px;">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
             style="width: <%= @open_percentage %>%;">
@@ -45,7 +50,7 @@
                 <%= render partial: "edit", locals: {task: task} %>
                 <tr>
                     <th scope="row"><%= task.id %></th>
-                    <td style="white-space: pre-wrap"><%= task.description %></td>
+                    <td class="text-break" style="white-space: pre-wrap"><%= task.description %></td>
                     <td>
                         <%= link_to "/tasks/#{task.id}/switch",
                             method: :put,
@@ -66,7 +71,7 @@
     </table>
     <br>
 
-    <h3>Finished Tasks</h3>
+    <h4>Finished Tasks</h4>
     <div class="progress" style="height: 15px;">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
             style="width: <%= @finished_percentage %>%;">
@@ -86,7 +91,7 @@
                 <%= render partial: "edit", locals: {task: task} %>
                 <tr>
                     <th scope="row"><%= task.id %></th>
-                    <td style="white-space: pre-wrap"><%= task.description %></td>
+                    <td class="text-break" style="white-space: pre-wrap"><%= task.description %></td>
                     <td>
                         <%= link_to "/tasks/#{task.id}/switch",
                             method: :put,
