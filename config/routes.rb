@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   put '/tasks/:id/switch', to: 'tasks#switch'
   delete '/tasks/:id', to: 'tasks#destroy'
   delete '/tasks', to: 'tasks#reset'
+
+  get '/about', to: 'about#index'
 end
